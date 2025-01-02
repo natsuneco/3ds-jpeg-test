@@ -139,6 +139,7 @@ bool loadJpeg(const char* filename, C3D_Tex* tex, C2D_Image* img) {
 int main(int argc, char* argv[]) {
     // Init libs
     gfxInitDefault();
+    romfsInit();
     C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
     C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
     C2D_Prepare();
@@ -153,7 +154,7 @@ int main(int argc, char* argv[]) {
     // Load texture
     C3D_Tex tex;
     C2D_Image img;
-    if (!loadJpeg("test.jpg", &tex, &img)) {
+    if (!loadJpeg("romfs:/test.jpg", &tex, &img)) {
         printf("Failed to load JPEG image\n");
     } else
         puts("JPEG loaded!");
@@ -182,6 +183,7 @@ int main(int argc, char* argv[]) {
     // Exit
     C2D_Fini();
     C3D_Fini();
+    romfsExit();
     gfxExit();
     return 0;
 }
